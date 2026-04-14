@@ -1,28 +1,28 @@
 import java.time.LocalDateTime;
 
 public class Task {
-    private static int lastID = 0;
-    private final int ID;
+    private static int lastId = 0;
+    private int id;
     private String description;
     private String status;
-    private final LocalDateTime createdAt;
+    private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public Task(String description) {
         this.description = description;
-        ID = ++lastID;
-        status = "To do";
+        id = ++lastId;
+        status = "todo";
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
     }
 
     public void markAsDone() {
-        status = "Done";
+        status = "done";
         updatedAt = LocalDateTime.now();
     }
 
     public void markInProgress() {
-        status = "In Progress";
+        status = "in-progress";
         updatedAt = LocalDateTime.now();
     }
 
@@ -31,8 +31,8 @@ public class Task {
         updatedAt = LocalDateTime.now();
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
     public String getStatus() {
@@ -40,6 +40,41 @@ public class Task {
     }
 
     public String toString() {
-        return "id: " + ID + ", description: " + description + ", status: " + status + ", created At: " + createdAt + ", updated At: " + updatedAt;
+        return "id: " + id
+                + ", description: " + description
+                + ", status: " + status
+                + ", created At: " + createdAt
+                + ", updated At: " + updatedAt;
+    }
+
+    public String toJson() {
+        return "{\"id\":\"" + id
+                + "\", \"description\":\"" + description.strip()
+                + "\", \"status\":\"" + status
+                + "\", \"createdAt\":\"" + createdAt
+                + "\", \"updatedAt\":\"" + updatedAt + "\"}";
+    }
+
+    public static Task fromJson(String json) {
+        json = json.replace("\"", "").replace("{", "").replace("}", "");
+        String[] jsonTask = json.split(",");
+
+        int id = Integer.parseInt(jsonTask[0].split(":")[1].strip());
+        String description = jsonTask[1].split((":"))[1].strip();
+        String status = jsonTask[2].split((":"))[1].strip();
+        String createdAt = jsonTask[3].split(("[a-z]:"))[1].strip();
+        String updatedAt = jsonTask[4].split(("[a-z]:"))[1].strip();
+
+        Task task = new Task(description);
+        task.id = id;
+        task.status = status;
+        task.createdAt = LocalDateTime.parse(createdAt);
+        task.updatedAt = LocalDateTime.parse(updatedAt);
+
+        if (id > lastId) {
+            lastId = id;
+        }
+
+        return task;
     }
 }
