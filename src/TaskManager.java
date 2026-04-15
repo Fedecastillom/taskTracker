@@ -15,7 +15,6 @@ public class TaskManager {
     public void addTask(String description) {
         Task new_task = new Task(description);
         tasks.add(new_task);
-//        System.out.println("Task added successfully. (ID " + new_task.getId() + ")"); // SACAR LOS SOUT DE LAS CLASES
     }
 
     public void updateTask(String id, String new_description) {
@@ -71,6 +70,11 @@ public class TaskManager {
 
         try {
             String jsonContent = Files.readString(FILE_PATH);
+
+            if (jsonContent.replaceAll("\\s", "").equals("[]")) {
+                return stored_tasks;
+            }
+
             String[] taskList = jsonContent.replace("[", "").replace("]", "").split("},");
 
             for (String taskJson : taskList) {

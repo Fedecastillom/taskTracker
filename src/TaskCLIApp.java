@@ -1,55 +1,65 @@
+import java.util.List;
+
 public class TaskCLIApp {
     static void main(String[] args) {
         TaskManager taskManager = new TaskManager();
-        String command = args[0];
 
-        /*
-        *  Mejorar el listado de las tareas
-        *  Arreglar que cuando esta vacio el archivo no funciona
-        *  Arreglar que cuando se pone una coma (,) en la descripcion no funciona
-        *  Mas println (delete, update, add, etc) pero fuera de las clases como en TaskManager:18
-        */
+        if (args.length == 0 || args[0].equals("help")) {
+            printHelp();
+            return;
+        }
+
+        String command = args[0];
 
         switch (command) {
             case "add":
                 if (validateArgs(args, 2)) {
                     taskManager.addTask(args[1]);
+                    System.out.println("Task added successfully.");
                 }
                 break;
 
             case "update":
                 if (validateArgs(args, 3)) {
                     taskManager.updateTask(args[1], args[2]);
+                    System.out.println("Task with ID " + args[1] + " updated.");
                 }
                 break;
 
             case "delete":
                 if (validateArgs(args, 2)) {
                     taskManager.deleteTask(args[1]);
-                }
-                break;
-
-            case "list":
-                if (args.length < 2) {
-                    System.out.println(taskManager.getTasks("all"));
-                } else {
-                    System.out.println(taskManager.getTasks(args[1]));
+                    System.out.println("Task with ID " + args[1] + " deleted.");
                 }
                 break;
 
             case "mark-done":
                 if (validateArgs(args, 2)) {
                     taskManager.markDone(args[1]);
+                    System.out.println("Task with ID " + args[1] + " marked as done.");
                 }
                 break;
 
             case "mark-in-progress":
                 if (validateArgs(args, 2)) {
                     taskManager.markInProgress(args[1]);
+                    System.out.println("Task with ID " + args[1] + " marked as in-progress.");
                 }
                 break;
 
-            case "help":
+            case "list":
+                List<Task> tasks = taskManager.getTasks(args.length < 2? "all" : args[1]);
+
+                for (Task task : tasks) {
+                    System.out.printf("[%d] (%s) %s%n",
+                            task.getId(),
+                            task.getStatus(),
+                            task.getDescription()
+                    );
+                }
+                break;
+
+            default:
                 printHelp();
                 return;
         }
@@ -58,7 +68,7 @@ public class TaskCLIApp {
 
     private static boolean validateArgs(String[] args, int expected) {
         if (args.length != expected) {
-            System.out.println("Invalid number of arguments. Expected: " + (expected - 1));
+            System.out.println("Invalid number of arguments. Expected: " + (expected));
             return false;
         }
         return true;

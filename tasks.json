@@ -1,5 +1,4 @@
 [
-{"id":"1", "description":"1", "status":"todo", "createdAt":"2026-04-13T21:29:51.824263200", "updatedAt":"2026-04-13T21:29:51.824263200"},
-{"id":"2", "description":"1", "status":"todo", "createdAt":"2026-04-13T21:29:56.225858200", "updatedAt":"2026-04-13T21:29:56.225858200"},
-{"id":"3", "description":"1", "status":"todo", "createdAt":"2026-04-13T21:29:57.849502300", "updatedAt":"2026-04-13T21:29:57.849502300"}
+{"id":"2", "description":"nuevo", "status":"done", "createdAt":"2026-04-15T19:23:46.738254300", "updatedAt":"2026-04-15T19:29:36.598390600"},
+{"id":"3", "description":"nuevo", "status":"todo", "createdAt":"2026-04-15T19:24:13.216080600", "updatedAt":"2026-04-15T19:24:13.216080600"}
 ]

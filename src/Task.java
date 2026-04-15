@@ -31,13 +31,9 @@ public class Task {
         updatedAt = LocalDateTime.now();
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getStatus() {
-        return status;
-    }
+    public int getId() { return id; }
+    public String getStatus() { return status; }
+    public String getDescription() { return description; }
 
     public String toString() {
         return "id: " + id
