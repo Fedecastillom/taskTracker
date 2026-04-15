@@ -12,9 +12,10 @@ public class TaskManager {
         tasks = loadTasks();
     }
 
-    public void addTask(String description) {
+    public Task addTask(String description) {
         Task new_task = new Task(description);
         tasks.add(new_task);
+        return new_task;
     }
 
     public void updateTask(String id, String new_description) {

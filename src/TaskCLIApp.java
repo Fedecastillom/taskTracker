@@ -14,36 +14,36 @@ public class TaskCLIApp {
         switch (command) {
             case "add":
                 if (validateArgs(args, 2)) {
-                    taskManager.addTask(args[1]);
-                    System.out.println("Task added successfully.");
+                    Task task = taskManager.addTask(args[1]);
+                    printAction("added", String.valueOf(task.getId()));
                 }
                 break;
 
             case "update":
                 if (validateArgs(args, 3)) {
                     taskManager.updateTask(args[1], args[2]);
-                    System.out.println("Task with ID " + args[1] + " updated.");
+                    printAction("updated", args[1]);
                 }
                 break;
 
             case "delete":
                 if (validateArgs(args, 2)) {
                     taskManager.deleteTask(args[1]);
-                    System.out.println("Task with ID " + args[1] + " deleted.");
+                    printAction("deleted", args[1]);
                 }
                 break;
 
             case "mark-done":
                 if (validateArgs(args, 2)) {
                     taskManager.markDone(args[1]);
-                    System.out.println("Task with ID " + args[1] + " marked as done.");
+                    printAction("marked done", args[1]);
                 }
                 break;
 
             case "mark-in-progress":
                 if (validateArgs(args, 2)) {
                     taskManager.markInProgress(args[1]);
-                    System.out.println("Task with ID " + args[1] + " marked as in-progress.");
+                    printAction("marked in-progress", args[1]);
                 }
                 break;
 
@@ -72,6 +72,10 @@ public class TaskCLIApp {
             return false;
         }
         return true;
+    }
+
+    private static void printAction(String action, String id) {
+        System.out.println("✔ Task (ID " + id + ") " + action);
     }
 
     public static void printHelp() {
