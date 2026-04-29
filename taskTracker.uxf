@@ -1,0 +1,40 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>980</x><y>230</y><w>220</w><h>270</h></coordinates><panel_attributes>Task
+--
+- lastid : int
+- id : int
+- description : String
+- status : String
+- createdAt : LocalDateTime
+- updatedAt : LocalDateTime
+--
++ Task(description: String)
++ markAsDode() : void
++ markInProgress() : void
++ updateDescription() : void
++ getId() : int
++ getStatus() : String
++ getDescription() : String
++ toString(): String
++ toJson() : String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>600</x><y>260</y><w>210</w><h>210</h></coordinates><panel_attributes>TaskManager
+--
+- FILE_PATH : Path
+- tasks : List&lt;Task&gt;
+--
++ TaskManager()
++ addTask() : Task
++ updateTask() : void
++ deleteTask() : void
++ markDone() : void
++ markInProgress() : void
++ findTask() : Task
+- loadTask()() : List&lt;Task&gt;
++ saveTasks() : void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>180</x><y>300</y><w>220</w><h>120</h></coordinates><panel_attributes>TaskCLIApp
+--
+
+--
++ main(args: String[])
+- validateArgs() : boolean
+- printAction() : void
+- printHelp() : void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>800</x><y>340</y><w>200</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*</panel_attributes><additional_attributes>10;10;180;10</additional_attributes></element><element><id>Relation</id><coordinates><x>390</x><y>340</y><w>230</w><h>30</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>210;10;10;10</additional_attributes></element></diagram>
